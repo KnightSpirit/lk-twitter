@@ -8,7 +8,7 @@ import Return from "icons/return.png";
 import { useUserStore } from "state/userStore";
 
 export default function TweetPage() {
-  const { query, push } = useRouter();
+  const { query, back } = useRouter();
   const user = useUserStore((s) => s.currentUser);
   const [errMsg, setErrMsg] = useState("");
   const [tweet, setTweet] = useState<LikeTwritter.Tweet>();
@@ -36,7 +36,7 @@ export default function TweetPage() {
           type="return"
           src={Return}
           onClick={() => {
-            push(`/${user}`);
+            back();
           }}
         />
       </div>

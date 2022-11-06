@@ -1,5 +1,4 @@
 import Post from "components/Post";
-import { useFeeds } from "hooks/useFeeds";
 import { useIntersectionObserverble } from "hooks/useIntersectionObserver";
 import { useRouter } from "next/router";
 import Image from "next/image";
@@ -9,9 +8,11 @@ import FeedItem from "./FeedItem";
 import Logout from "icons/logout.png";
 import Theme from "icons/theme.png";
 import { useThemeStore } from "state/theme";
+import { useTweetsStore } from "state/tweetsStore";
 
 export default function FeedList() {
-  const { feeds, fetchMoreData, refreshList } = useFeeds();
+  // const { feeds } = useFeeds();
+  const feeds = useTweetsStore((s) => s.tweets);
   const listening = useRef(false);
   const user = useUserStore((s) => s.currentUser);
   const setMode = useThemeStore((s) => s.setMode);
@@ -19,7 +20,7 @@ export default function FeedList() {
   const logout = useUserStore((s) => s.logOut);
   const router = useRouter();
 
-  const { listen } = useIntersectionObserverble(fetchMoreData);
+  const { listen } = useIntersectionObserverble();
 
   function toPage(tweet: LikeTwritter.Tweet, ind: number) {
     router.push({
@@ -32,13 +33,11 @@ export default function FeedList() {
   }
 
   useEffect(() => {
-    if (feeds.length > 0) {
-      if (!listening.current) {
-        listening.current = true;
-        listen("#next");
-      }
+    if (!listening.current) {
+      listening.current = true;
+      listen("#next");
     }
-  }, [feeds]);
+  }, []);
 
   return (
     <>
@@ -46,7 +45,7 @@ export default function FeedList() {
         <Image
           width={30}
           height={30}
-          alt="logout"
+          alt='logout'
           src={Logout}
           onClick={() => {
             logout();
@@ -56,14 +55,14 @@ export default function FeedList() {
         <Image
           width={30}
           height={30}
-          alt="theme"
+          alt='theme'
           src={Theme}
           onClick={() => {
             setMode(theme === "dark" ? "normal" : "dark");
           }}
         />
       </div>
-      <Post refresh={refreshList} />
+      <Post />
       {feeds.length > 0 && (
         <>
           {feeds.map((v, ind) => {
@@ -73,13 +72,13 @@ export default function FeedList() {
                 ind={ind}
                 onClick={() => toPage(v, ind)}
                 item={v}
-                // key={v.id}
+                key={v.id}
               />
             );
           })}
-          <div id="next" style={{ padding: 6 }}></div>
         </>
       )}
+      <div id='next' style={{ padding: 6 }}></div>
     </>
   );
 }

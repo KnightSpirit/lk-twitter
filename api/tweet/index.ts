@@ -7,14 +7,14 @@ export function fetchTweetById(id: LikeTwritter.TweetId) {
   return getTweetsById(id);
 }
 
-export function fetchTweetsByTimeDesc(from?: number) {
+export function fetchTweetsByTimeDesc(from?: number, then?: number) {
   const tweets = getTweets();
   tweets.sort((a, b) =>
     dayjs(a.timestamp).unix() - dayjs(b.timestamp).unix() > 0 ? -1 : 1
   );
   const _from = from || 0;
   return {
-    tweets: tweets.slice(_from, _from + defaultPullSize),
+    tweets: tweets.slice(_from, then || _from + defaultPullSize),
     total: tweets.length,
   };
 }

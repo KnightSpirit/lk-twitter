@@ -3,15 +3,12 @@ import { useState } from "react";
 import { Button } from "react-bootstrap";
 import FloatingLabel from "react-bootstrap/FloatingLabel";
 import Form from "react-bootstrap/Form";
+import { useTweetsStore } from "state/tweetsStore";
 import { useUserStore } from "state/userStore";
 
-interface PostProps {
-  refresh: () => void;
-}
-
-export default function Post(props: PostProps) {
-  const { refresh } = props;
+export default function Post() {
   const user = useUserStore((s) => s.currentUser);
+  const post = useTweetsStore((s) => s.create);
   const [tweetText, setText] = useState("");
   return (
     <FloatingLabel
@@ -36,9 +33,8 @@ export default function Post(props: PostProps) {
       <Button
         style={{ marginTop: 8, float: "right" }}
         onClick={() => {
-          const result = postTweet(tweetText, user);
+          const result = post(tweetText, user);
           if (!result.error) {
-            refresh();
             setText("");
           }
         }}

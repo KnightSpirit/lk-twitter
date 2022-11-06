@@ -31,3 +31,7 @@ declare namespace LikeTwritter {
 
   type Login = (username: string, password: string) => Promise<void>;
 }
+
+declare type Result = {
+  error: string;
+};

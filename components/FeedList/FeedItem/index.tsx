@@ -24,6 +24,7 @@ export default function FeedItem(props: {
   const [tempEdit, setTempEdit] = useState(false);
   const [tempText, setTempText] = useState(item.text);
   const { push } = useRouter();
+
   return (
     <div className={styles.feed_layout} onClick={onClick}>
       <div className={`${commonStyles.feed_avatar} bg-info rounded-circle`}>
