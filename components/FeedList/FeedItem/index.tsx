@@ -4,7 +4,7 @@ import Edit from "icons/edit.png";
 import Confirm from "icons/confirm.png";
 import Delete from "icons/delete.png";
 import { useTweetsStore } from "state/tweetsStore";
-import { useState } from "react";
+import { MouseEventHandler, useState } from "react";
 import { Form } from "react-bootstrap";
 import FunctionalIcon from "./FunctionalIcon";
 import { useRouter } from "next/router";
@@ -13,7 +13,7 @@ import { useUserStore } from "state/userStore";
 export default function FeedItem(props: {
   singleDetail?: boolean;
   isMine: boolean;
-  onClick?: Function;
+  onClick?: MouseEventHandler<HTMLDivElement> | undefined;
   item: LikeTwritter.Tweet;
   ind: number;
 }) {
