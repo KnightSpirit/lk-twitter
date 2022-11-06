@@ -1,4 +1,5 @@
 import create from "zustand";
+import { useTweetsStore } from "./tweetsStore";
 
 type UserStore = {
   currentUser: string;
@@ -12,6 +13,7 @@ export const useUserStore = create<UserStore>((set) => ({
     set(() => ({ currentUser: userId }));
   },
   logOut: () => {
+    useTweetsStore.getState().reset()
     set({ currentUser: "" });
   },
 }));

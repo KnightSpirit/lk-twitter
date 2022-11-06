@@ -2,7 +2,6 @@ import { fetchTweetsByTimeDesc } from "api/tweet";
 import {
   createTweets,
   deleteTweets,
-  getTweets,
   updateTweets,
 } from "fake-db/tweets";
 import create from "zustand";
@@ -15,12 +14,16 @@ type TweetsStore = {
   delete: (tweetId: number, pos: number) => Result;
   update: (tweetId: number, text: string) => Result;
   fetchMoreTweets: () => void;
+  reset: () => void;
 };
 
 export const useTweetsStore = create<TweetsStore>((set, get) => ({
   tweets: [],
   nextKey: 0,
   total: 0,
+  reset: () => {
+    set({tweets: [], nextKey: 0, total: 0})
+  },
   create: (text, userId) => {
     // when create new tweets, refresh list
     const result = createTweets({ text, username: userId });

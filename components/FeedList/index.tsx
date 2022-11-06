@@ -11,13 +11,10 @@ import { useThemeStore } from "state/theme";
 import { useTweetsStore } from "state/tweetsStore";
 
 export default function FeedList() {
-  // const { feeds } = useFeeds();
-  const feeds = useTweetsStore((s) => s.tweets);
   const listening = useRef(false);
-  const user = useUserStore((s) => s.currentUser);
-  const setMode = useThemeStore((s) => s.setMode);
-  const theme = useThemeStore((s) => s.theme);
-  const logout = useUserStore((s) => s.logOut);
+  const feeds = useTweetsStore((s) => s.tweets);
+  const { currentUser: user, logOut: logout } = useUserStore();
+  const { setMode, theme } = useThemeStore();
   const router = useRouter();
 
   const { listen } = useIntersectionObserverble();

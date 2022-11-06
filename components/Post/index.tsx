@@ -1,4 +1,3 @@
-import { postTweet } from "api/tweet";
 import { useState } from "react";
 import { Button } from "react-bootstrap";
 import FloatingLabel from "react-bootstrap/FloatingLabel";
