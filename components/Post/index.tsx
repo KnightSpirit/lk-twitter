@@ -32,6 +32,7 @@ export default function Post() {
       <Button
         style={{ marginTop: 8, float: "right" }}
         onClick={() => {
+          // TODO: 错误处理
           const result = post(tweetText, user);
           if (!result.error) {
             setText("");

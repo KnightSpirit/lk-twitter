@@ -1,6 +1,7 @@
 import { useEffect, useRef } from "react";
 import { useTweetsStore } from "state/tweetsStore";
 
+// 监听 listview fetch next dom 是否出现
 export function useIntersectionObserverble() {
   const intersectionObserver = useRef<IntersectionObserver>();
   const fillFeeds = useTweetsStore((s) => s.fetchMoreTweets)

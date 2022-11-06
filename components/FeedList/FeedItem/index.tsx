@@ -18,8 +18,7 @@ export default function FeedItem(props: {
   ind: number;
 }) {
   const { ind, onClick, item, isMine, singleDetail } = props;
-  const deleteTweet = useTweetsStore((s) => s.delete);
-  const updateTweet = useTweetsStore((s) => s.update);
+  const { delete: deleteTweet, update: updateTweet } = useTweetsStore();
   const user = useUserStore((s) => s.currentUser);
   const [tempEdit, setTempEdit] = useState(false);
   const [tempText, setTempText] = useState(item.text);
@@ -57,7 +56,9 @@ export default function FeedItem(props: {
                     type="delete"
                     src={Delete}
                     onClick={() => {
+                      // 错误处理
                       deleteTweet(item.id, ind);
+                      // 这里如果是独立的详情页删除之后要跳回到 timeline
                       if (singleDetail) {
                         push(`/${user}`);
                       }

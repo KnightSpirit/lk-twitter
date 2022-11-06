@@ -12,6 +12,7 @@ function useVerifyUserIdentify() {
   const userIdInUrl = query.username;
 
   useEffect(() => {
+    // 如果 store 和直接访问的用户 id 不一致，回到首页
     if (currentUser === userIdInUrl) {
       setVerify(false);
       return;
