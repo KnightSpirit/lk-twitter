@@ -1,5 +1,4 @@
 declare namespace LikeTwritter {
-
   type UserId = string;
 
   interface User {
@@ -9,22 +8,26 @@ declare namespace LikeTwritter {
     tweets?: Tweet[];
   }
 
-  interface Tweets {
+  interface Tweet {
     id: TweetId;
     text: string;
-    timestamp: number;
-	owner: UserId
+    timestamp: number | string;
+    owner: string;
+    username: UserId;
   }
 
-  type TweetId = string;
+  type TweetId = number;
   // Crud Tweet
-  type CreateTweet = (tweet: Tweets) => Promise<string>;
-  type UpdateTweet = (tweet: Tweets) => Promise<string>;
+  type CreateTweet = (tweet: Tweet) => Promise<string>;
+  type UpdateTweet = (tweet: Tweet) => Promise<string>;
   type DeleteTweet = (id: TweetId) => Promise<boolean>;
-  type GetTweets = (id?: TweetId | UserId, readCount?: number) => Promise<Tweet | Tweet[]>;
+  type GetTweets = (
+    id?: TweetId | UserId,
+    readCount?: number
+  ) => Promise<Tweet | Tweet[]>;
 
   // Crud User
-  type CreateAccount = (tweet: Tweets) => Promise<string>;
+  type CreateAccount = (tweet: Tweet) => Promise<string>;
 
   type Login = (username: string, password: string) => Promise<void>;
 }

@@ -1,0 +1,33 @@
+.feed_layout {
+  display: flex;
+  flex-direction: row;
+  border-bottom: 1px solid rgb(239, 243, 244);
+  padding: 24px 0;
+
+  &:last-child {
+    border: none;
+  }
+
+  .feed_content {
+    width: 85%;
+    .feed_owner_name {
+      font-weight: bold;
+      font-size: 15px;
+      display: flex;
+      flex-direction: row;
+    }
+    .feed_meta_info {
+      display: flex;
+      flex-direction: row;
+      align-items: center;
+      justify-self: center;
+      color: rgb(83, 100, 113);
+      padding-right: 8px;
+    }
+    .feed_timespan {
+      margin-top: 4px;
+      font-size: 15px;
+      margin-right: auto;
+    }
+  }
+}

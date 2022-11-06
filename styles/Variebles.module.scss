@@ -1,0 +1,6 @@
+$primary-dark-bg-color: black;
+$primary-bg-color: white;
+:export {
+  primaryBgColor: $primary-dark-bg-color;
+  primaryColor: $primary-bg-color;
+}
